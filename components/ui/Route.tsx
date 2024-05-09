@@ -4,8 +4,8 @@ import clsx from "clsx";
 interface IRouteProps {
   route: string;
   label: string;
-  isActive: boolean;
-  onClick: () => void;
+  isActive?: boolean;
+  onClick?: () => void;
 }
 
 const Route = ({ route, label, isActive, onClick }: IRouteProps) => {
