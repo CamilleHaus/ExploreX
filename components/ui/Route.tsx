@@ -13,7 +13,7 @@ const Route = ({ route, label, isActive, onClick }: IRouteProps) => {
     <Link
       href={route}
       onClick={onClick}
-      className={clsx(isActive && "text-primary rounded-none bg-transparent")}
+      className={clsx(isActive && "text-primary")}
     >
       {label}
     </Link>

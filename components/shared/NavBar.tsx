@@ -3,6 +3,8 @@ import Link from "next/link";
 import Button from "../ui/Button";
 import Route from "../ui/Route";
 import { navLinks } from "@/constants";
+import MobileMenu from "./MobileMenu";
+import UseMenuActive from "@/hooks/UseMenuActive";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 
@@ -19,15 +21,22 @@ const NavBar = () => {
           </Link>
         </div>
         <ul className="flex items-center justify-center gap-16 flex-2 max-md:hidden">
-          {navLinks.map((link, index) => (
-            <li key={index}>
-              <Route route={link.route} label={link.label} />
-            </li>
-          ))}
+          {navLinks.map((link, index) => {
+            const isActive = UseMenuActive(link.route);
+
+            return (
+              <li key={index}>
+                <Route route={link.route} label={link.label} isActive={isActive} />
+              </li>
+            );
+          })}
         </ul>
         <div className="flex gap-5 flex-1 justify-end max-md:hidden">
-            <Button text="Log In" onClick={() => null} aria="log in button"/>
-            <Button text="Sign Up" onClick={() => null} aria="sign up button"/>
+          <Button text="Log In" onClick={() => null} aria="log in button" />
+          <Button text="Sign Up" onClick={() => null} aria="sign up button" />
+        </div>
+        <div>
+          <MobileMenu />
         </div>
       </div>
     </nav>
