@@ -9,6 +9,27 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 const NavBar = () => {
+
+    const  [ isScrolling, setIsScrolling ] = useState(false);
+
+
+    // to maintain our navBar with a fixed behavior on screen
+    useEffect(() => {
+        const handleScroll = () => {
+            if(window.scrollY > 0) {
+                setIsScrolling(true)
+            } else { 
+                setIsScrolling(false)
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll)
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, []);
+    
   return (
     <nav className="py-4 w-full">
       <div className="w-[95%] mx-auto max-w-[1450px] flex items-center justify-between pb-5 border-b border-gray-100">
