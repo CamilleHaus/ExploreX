@@ -49,7 +49,8 @@ const Hero = () => {
               key={id}
               className="flex flex-col gap-3 items-center text-center relative"
             >
-              <Link className="w-full"
+              <Link
+                className="w-full"
                 href={{
                   pathname: `blog/${post.id}`,
                   query: { ...post },
