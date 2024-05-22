@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Overlay from "@/components/ui/Overlay";
 import Button from "@/components/ui/Button";
+import Map from "@/components/ui/Map";
 
 const Page = () => {
   return (
@@ -59,6 +60,7 @@ const Page = () => {
           </div>
         </form>
       </div>
+      <Map />
     </div>
   );
 };

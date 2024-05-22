@@ -1,6 +1,6 @@
 interface IButtonProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   aria: string;
 }
 
