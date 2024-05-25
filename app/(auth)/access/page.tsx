@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
@@ -7,21 +7,49 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Page = () => {
+  const session = useSession();
 
-    const session = useSession();
+  const router = useRouter();
 
-    const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      console.log("authenticated");
+      router.push("/");
+    }
+  }, [session?.status, router]);
 
-    useEffect(() => {
-        if(session?.status === "authenticated") {
-            console.log("authenticated")
-            router.push("/")
+  const socialAction = (action: string) => {
+    setIsLoading(true);
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          return;
         }
-    }, [session?.status, router])
 
-    return <div>Access</div>
+        if (callback?.ok) {
+          router.push("/");
+        }
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  return (
+    <div className="my-24 sm:mx-auto sm:max-w-4xl px-5">
+      <div className="bg-white shadow sm:rounded-lg flex gap-5 justify-between h-96 overflow-hidden">
+        <div className="mt-6 flex gap-2 flex-col justify-center items-center mx-auto">
+          <Link href={"/"} className="mb-5">
+            <h1 className="text-3xl font-extrabold text-secondary">
+              Explore<span className="text-primary">X</span>
+            </h1>
+          </Link>
+          <span className="text-small">Login or Sign Up with the links below</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Page;
