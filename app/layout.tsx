@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
 import AuthContext from "@/context/Authcontext";
+import getCurentUser from "./actions/getCurrentUser";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
   description: "Travel Blog",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const user = await getCurentUser()
   return (
     <html lang="en">
       <AuthContext>
@@ -27,7 +30,7 @@ export default function RootLayout({
           className={`${roboto.className}
       overflow-x-hidden bg-light`}
         >
-          <NavBar />
+          <NavBar user={user}/>
           {children}
           <Footer />
         </body>

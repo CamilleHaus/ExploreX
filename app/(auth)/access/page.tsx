@@ -5,6 +5,11 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  FacebookLoginButton,
+  GithubLoginButton,
+  GoogleLoginButton,
+} from "react-social-login-buttons";
 
 const Page = () => {
   const session = useSession();
@@ -45,11 +50,26 @@ const Page = () => {
               Explore<span className="text-primary">X</span>
             </h1>
           </Link>
-          <span className="text-small">Login or Sign Up with the links below</span>
+          <span className="text-small">
+            Login or Sign Up with the links below
+          </span>
+          <GoogleLoginButton onClick={() => socialAction("google")} />
+          <GithubLoginButton />
+          <FacebookLoginButton />
         </div>
+
+        <Image
+          src="/assets/second.jpg"
+          height={500}
+          width={500}
+          alt="Sign up form image"
+          className="object-cover lg:block hidden"
+        />
       </div>
     </div>
   );
 };
 
 export default Page;
+
+//Problema no login do Google
