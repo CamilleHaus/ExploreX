@@ -5,6 +5,7 @@ import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
 import AuthContext from "@/context/Authcontext";
 import getCurentUser from "./actions/getCurrentUser";
+import { EdgeStoreProvider } from "../lib/edgestore";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,19 +22,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const user = await getCurentUser()
+  const user = await getCurentUser();
   return (
     <html lang="en">
       <AuthContext>
-        <body
-          className={`${roboto.className}
+        <EdgeStoreProvider>
+          <body
+            className={`${roboto.className}
       overflow-x-hidden bg-light`}
-        >
-          <NavBar user={user}/>
-          {children}
-          <Footer />
-        </body>
+          >
+            <NavBar user={user} />
+            {children}
+            <Footer />
+          </body>
+        </EdgeStoreProvider>
       </AuthContext>
     </html>
   );
