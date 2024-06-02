@@ -1,10 +1,12 @@
-import { blogData } from "@/constants/blogData";
 import Tag from "../ui/Tag";
 import Overlay from "../ui/Overlay";
 import Link from "next/link";
+import Image from "next/image";
+import { IPostTypes } from "@/types/postTypes";
 
-const Hero = () => {
-  const featuredPost = blogData.filter((blog) => blog.featured === true);
+const Hero: React.FC<{posts: IPostTypes[]}> = ({ posts }) => {
+
+  const featuredPost = posts.filter((post) => post.featured === true);
 
   const topFeature = featuredPost.slice(0, 1);
   const bottomFeature = featuredPost.slice(1, 4);
@@ -17,24 +19,24 @@ const Hero = () => {
             key={id}
             className="flex flex-col gap-5 mb-5 text-center relative"
           >
-            <Tag text={post.tags} />
+            <Tag text={post.category} />
             <h2 className="text-6xl font-extrabold uppercase text-tertiary">
               {post.title}
             </h2>
             <div className="flex items-center gap-3 font-light text-tertiary justify-center">
-              <div className="w-10 h-10 rounded-full bg-black"></div>
-              <span>{post.authorName}</span>
-              <span className="italic">{post.publishDate}</span>
+              {post.user.image && (
+                <Image src={post.user.image} height={50} width={50} alt={`Image of ${post.user.name}`}
+                className="rounded-full drop-shadow-lg"/>
+              )}
+              <span>{post.user.name}</span>
+              {/* <span className="italic">{post.publishDate}</span> */}
             </div>
             <Link
-              href={{
-                pathname: `blog/${post.id}`,
-                query: { ...post },
-              }}
+              href={`/blog/${post.id}`}
             >
               <div className="relative max-h-[600px] overflow-hidden shadow-xl">
                 <img
-                  src={post.image_path}
+                  src={post.img}
                   alt={`image for ${post.title}`}
                   className="object-cover w-full h-full"
                 />
@@ -51,25 +53,22 @@ const Hero = () => {
             >
               <Link
                 className="w-full"
-                href={{
-                  pathname: `blog/${post.id}`,
-                  query: { ...post },
-                }}
+                href={`/blog/${post.id}`}
               >
                 <div className="overflow-hidden h-72 shadow-xl w-full">
                   <img
-                    src={post.image_path}
+                    src={post.img}
                     alt={`image for ${post.title}`}
                     className="object-cover w-full h-full"
                   />
                   <Overlay />
                 </div>
               </Link>
-              <Tag text={post.tags} />
+              <Tag text={post.category} />
               <h3 className="text-sm font-extrabold uppercase text-tertiary px-5">
                 {post.title}
               </h3>
-              <span className="font-light italic">{post.publishDate}</span>
+              <span className="font-light italic">{post.user.name}</span>
             </article>
           ))}
         </div>
