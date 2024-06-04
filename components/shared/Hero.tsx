@@ -3,6 +3,7 @@ import Overlay from "../ui/Overlay";
 import Link from "next/link";
 import Image from "next/image";
 import { IPostTypes } from "@/types/postTypes";
+import { formatDate } from "@/utils/formatDate";
 
 const Hero: React.FC<{posts: IPostTypes[]}> = ({ posts }) => {
 
@@ -29,7 +30,7 @@ const Hero: React.FC<{posts: IPostTypes[]}> = ({ posts }) => {
                 className="rounded-full drop-shadow-lg"/>
               )}
               <span>{post.user.name}</span>
-              {/* <span className="italic">{post.publishDate}</span> */}
+              <span className="italic">{formatDate(post.createdAt)}</span>
             </div>
             <Link
               href={`/blog/${post.id}`}
@@ -68,7 +69,7 @@ const Hero: React.FC<{posts: IPostTypes[]}> = ({ posts }) => {
               <h3 className="text-sm font-extrabold uppercase text-tertiary px-5">
                 {post.title}
               </h3>
-              <span className="font-light italic">{post.user.name}</span>
+              <span className="font-light italic">By: {post.user.name} {formatDate(post.createdAt)}</span>
             </article>
           ))}
         </div>
