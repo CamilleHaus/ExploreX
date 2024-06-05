@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="w-full py-5 bg-tertiary mt-10 ">
+    <div className="w-full py-5 bg-footer mt-10 ">
       <div className="w-[95%] mx-auto max-w-[1450px]">
         <div className="py-5 border-b border-gray-300 border-opacity-20 flex justify-between items-center max-md:flex-col max-md:gap-8">
           <div className="flex-1">

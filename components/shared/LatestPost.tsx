@@ -27,7 +27,7 @@ const LatestPost: React.FC<{ posts: IPostTypes[] }> = ({ posts }) => {
         </h2>
       </div>
 
-      <div className="flex flex-col gap-10 h-full ml-10">
+      <div className="flex flex-col gap-10 h-full">
         {latestPost.slice(0, visibleBlogs).map((post, id) => (
           <BlogCard post={post} key={id} />
         ))}

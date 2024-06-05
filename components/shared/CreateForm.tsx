@@ -77,11 +77,11 @@ const CreateForm = ({ user }: { user: userTypes }) => {
                 <option value="" disabled selected>
                   Choose Tag
                 </option>
-                <option value="Adventure">Adventure</option>
+                <option value="Science">Science</option>
                 <option value="Culture">Culture</option>
-                <option value="Journey">Journey</option>
-                <option value="Discovery">Discovery</option>
-                <option value="Wanderlust">Wanderlust</option>
+                <option value="Sports">Sports</option>
+                <option value="Daily">Daily</option>
+                <option value="History">History</option>
               </select>
               <Input type="hidden" name="email" value={user?.email || ""} />
               <Button type="submit" text="Create" aria="create blog" />

@@ -11,8 +11,14 @@ import { navLinks } from "@/constants";
 import Link from "next/link";
 import Route from "../ui/Route";
 import UseMenuActive from "@/hooks/UseMenuActive";
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
-const MobileMenu = () => {
+interface IMobileMenuProps {
+  user: User
+}
+
+const MobileMenu: React.FC<IMobileMenuProps> = ({ user }) => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const mobileMenuHandler = () => {
@@ -32,7 +38,7 @@ const MobileMenu = () => {
             onClick={(e) => e.stopPropagation()} // Faz com o que MenuMobile feche ao clicar fora da div mas não ao clicar dentro
             className="absolute h-screen left-0 top-0 w-60 bg-white z-[999] px-5 border-right overflow-y-hidden flex flex-col gap-10"
           >
-            <div className="border-b py-5">
+            <div className="border-b py-5 text-center">
               <Link href={"/"}>
                 <h1 className="text-3xl font-extrabold text-secondary">
                   Explore
@@ -46,21 +52,53 @@ const MobileMenu = () => {
                 <FaSquareSnapchat />
               </div>
             </div>
-            <ul className="flex items-center justify-center gap-10 flex-col mt-5 flex-1 py-5 border-b">
+            <ul className="flex items-center justify-center gap-5 flex-col mt-5 py-10 border-b">
               {navLinks.map((link, index) => {
-            const isActive = UseMenuActive(link.route);
+                const isActive = UseMenuActive(link.route);
 
-            return (
-              <li key={index}>
-                <Route route={link.route} label={link.label} isActive={isActive} />
-              </li>
-            );
-          })}
+                return (
+                  <li key={index}>
+                    <Route
+                      route={link.route}
+                      label={link.label}
+                      isActive={isActive}
+                    />
+                  </li>
+                );
+              })}
             </ul>
-            <div className="flex gap-5 flex-1 flex-col py-5">
-            <Button text="Log In" onClick={() => null} aria="log in button"/>
-            <Button text="Sign Up" onClick={() => null} aria="sign up button"/>
-            </div>
+            {!user && (
+              <div className="flex gap-5 flex-1 flex-col py-5">
+                <Button
+                  text="Log In"
+                  onClick={() => null}
+                  aria="log in button"
+                />
+                <Button
+                  text="Sign Up"
+                  onClick={() => null}
+                  aria="sign up button"
+                />
+              </div>
+            )}
+
+            {user && (
+              <div>
+                <ul className="flex flex-col  gap-5 items-center">
+                  <Link href="/create" onClick={() => setOpenMobileMenu(false)}>
+                    <li>Create a Post</li>
+                  </Link>
+                  <Link
+                    href="/userposts"
+                    onClick={() => setOpenMobileMenu(false)}
+                  >
+                    <li>My Post</li>
+                  </Link>
+
+                  <li onClick={() => signOut()}>Sign Out</li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       ) : null}

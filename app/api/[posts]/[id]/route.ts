@@ -27,4 +27,4 @@ export const GET = async (req: NextRequest, { params }: { params: IParams }) => 
             { status: 500 }
         );
     }
-}
+};
