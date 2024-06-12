@@ -26,11 +26,11 @@ const Post: React.FC<{ posts: IPostTypes[] }> = ({ posts }) => {
   };
 
   const categories = [
-    "Adventure",
-    "Wanderlust",
+    "Daily",
+    "History",
     "Culture",
-    "Discovery",
-    "Journeys"
+    "Science",
+    "Sports"
   ];
 
   const handleCategoryChange = (category: string) => {

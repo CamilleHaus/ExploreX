@@ -54,8 +54,8 @@ const Page = () => {
             Login or Sign Up with the links below
           </span>
           <GoogleLoginButton onClick={() => socialAction("google")} />
-          <GithubLoginButton />
-          <FacebookLoginButton />
+          {/* <GithubLoginButton />
+          <FacebookLoginButton /> */}
         </div>
 
         <Image

@@ -13,7 +13,7 @@ const TopPost: React.FC<{ posts: IPostTypes[] }> = ({ posts }) => {
       <div className="w-full text-center">
         <h2
           id="top-post"
-          className="text-center text-2xl font-extrabold uppercase text-tertiary inline-block px-2 mb-10"
+          className="text-center text-2xl font-extrabold uppercase text-tertiary inline-block px-2 mb-10 max-sm:pt-10"
         >
           Top Post
         </h2>
