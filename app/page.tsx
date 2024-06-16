@@ -2,6 +2,8 @@ import Hero from "@/components/shared/Hero";
 import LatestPost from "@/components/shared/LatestPost";
 import TopPost from "@/components/shared/TopPost";
 import prisma from "@/lib/prismaDB";
+import { SessionProvider } from "next-auth/react";
+import { AppProps } from "next/app";
 
 const Home = async () => {
   
