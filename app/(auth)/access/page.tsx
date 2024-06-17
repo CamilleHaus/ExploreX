@@ -59,7 +59,7 @@ const Page = () => {
         </div>
 
         <Image
-          src="/assets/second.jpg"
+          src="/sign-in-button.png"
           height={500}
           width={500}
           alt="Sign up form image"
